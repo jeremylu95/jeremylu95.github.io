@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #f188f7;
+  background: #ff2aff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1510,25 +1510,6 @@ pre .javascript .function {
     left: 20px;
     opacity: 0.8;
   }
-}
-body {
-  background-image: url("/images/bg.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  background-size: 100% 100%;
-}
-.content-wrap {
-  opacity: 0.9;
-}
-.sidebar {
-  opacity: 1;
-}
-.header-inner {
-  background: #fff;
-}
-.popup {
-  opacity: 1;
 }
 .post-body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -2557,10 +2538,4 @@ ul.breadcrumb li + li:last-child {
 }
 .links-of-blogroll-item {
   padding: 0;
-}
-* {
-  cursor: url("/images/star.ico"), auto !important;
-}
-:active {
-  cursor: url("/images/star.ico"), auto !important;
 }

@@ -165,7 +165,8 @@
 
 
 <hr>
-<h3 id="9、访问控制符"><a href="#9、访问控制符" class="headerlink" title="9、访问控制符"></a>9、访问控制符</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="C:%5CUsers%5Cxy%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200613101742851.png" alt="image-20200613101742851"></h3><hr>
+<h3 id="9、访问控制符"><a href="#9、访问控制符" class="headerlink" title="9、访问控制符"></a>9、访问控制符</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="C:%5CUsers%5Cxy%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200613101742851.png" alt="image-20200613101742851"></h3><p>Private可以修饰变量，也可修饰方法。</p>
+<hr>
 <h3 id="10、运算符"><a href="#10、运算符" class="headerlink" title="10、运算符"></a>10、运算符</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类:"></a>分类:</h4><img src="C:\Users\xy\AppData\Roaming\Typora\typora-user-images\image-20200614201912842.png" alt="image-20200614201912842" style="zoom:50%;" />
 
 <h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点:"></a>知识点:</h4><ol>
@@ -236,7 +237,7 @@
 
 
 <hr>
-<h3 id="12、数组"><a href="#12、数组" class="headerlink" title="12、数组"></a>12、数组</h3><h4 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组?"></a>什么是数组?</h4><p>数组是相同数据类型的有序集合。</p>
+<h3 id="12、数组"><a href="#12、数组" class="headerlink" title="12、数组"></a>12、数组</h3><h4 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组?"></a>什么是数组?</h4><p>数组是相同数据类型的有序集合。存储在数组当中的数据都属于同一数据类型</p>
 <h4 id="数组的定义与使用"><a href="#数组的定义与使用" class="headerlink" title="数组的定义与使用"></a>数组的定义与使用</h4><ol>
 <li><p>需掌握动态初始化和静态初始化两种定义方式</p>
 </li>
@@ -319,6 +320,10 @@
 
 <hr>
 <h3 id="16、类"><a href="#16、类" class="headerlink" title="16、类"></a>16、类</h3><h4 id="什么是类？"><a href="#什么是类？" class="headerlink" title="什么是类？"></a>什么是类？</h4><p>类是对相同事物的抽象描述。类中有属性（成员变量）和行为（成员方法），注意描述时不要说类的属性、类的行为，要说类的成员变量、类的成员方法。</p>
+<p>类分为功能类和测试类。功能类是功能代码，测试类与实际开发无关，正式上线后可删除</p>
+<p>类中属性不需赋值，在对象创建成功后再赋值即可</p>
+<p>测试类的规范，测试哪个类，就写类名estQ+</p>
+<p>后续开发可以单独把测试类放一起方便删除</p>
 <h4 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">[修饰符] class 类名&#123;</span></span><br><span class="line"><span class="comment">    成员变量定义：[修饰符] 数据类型 成员变量名;</span></span><br><span class="line"><span class="comment">    成员方法定义：[修饰符] 返回值数据类型 成员方法名(形参列表)&#123;方法体&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    String name = <span class="string">"浅枫"</span>;</span><br><span class="line">    <span class="keyword">int</span> age = <span class="number">24</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"学会学习再学习"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">practise</span><span class="params">(<span class="keyword">boolean</span> ifKeep)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ifKeep) &#123;</span><br><span class="line">            System.out.println(<span class="string">"坚持练习实现自我反馈，慢慢积累经验，提升能力"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"根据记忆曲线，慢慢遗忘，能力得不到提升"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -436,8 +441,8 @@
 <td align="center">快捷键导包</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">按住鼠标中键后移动鼠标</td>
+<td align="center">可同时修改多行</td>
 </tr>
 </tbody></table>
 <h4 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h4><ul>
@@ -460,7 +465,7 @@
 <h3 id="20、面向对象"><a href="#20、面向对象" class="headerlink" title="20、面向对象"></a>20、面向对象</h3><p>封装、继承、多态是对象的三大特征</p>
 <h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装是将类的某些信息隐藏在该类中，外部类无法直接访问，只能通过set/get方法间接访问。</p>
 <p>封装的原则，变量通过private私有化，提供 set/get方法，外部类通过set/get方法操作该变量。在set方法中可以增加判断，能够提供安全性。此外，封装后的代码能够多次调用，提高了代码的复用性。</p>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><hr>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><hr>
 <h3 id="21、标准类制作"><a href="#21、标准类制作" class="headerlink" title="21、标准类制作"></a>21、标准类制作</h3><p>1、成员变量：使用private修饰</p>
 <p>2、构造方法：提供一个无参构造方法、提供一个带有多个参数的构造方法</p>
 <p>​    如果没有定义构造方法，系统默认创建一个无参构造方法；如果定义了有参构造方法，系统不会自动创建无参构造方法，因此，建议不管有没有无参构造方法，都手动加一下，避免遗漏。</p>
@@ -546,23 +551,28 @@
 <p>System.exit(0)退出虚拟机</p>
 <p>break;</p>
 <p>return</p>
-<p>获取长度方法对比    </p>
-<p>数组    数组名.length    获取的是数组元素个数</p>
+<h3 id="27、获取长度方法对比"><a href="#27、获取长度方法对比" class="headerlink" title="27、获取长度方法对比"></a>27、获取长度方法对比</h3><p>数组    数组名.length    获取的是数组元素个数</p>
 <p>String         变量名.length()    获取的是字符个数</p>
 <p>StringBuilder    变量名.length()    获取的是字符个数</p>
 <p>ArrayList    size()    获取的是集合元素个数</p>
-<p>remove    相对删除    文件放入回收站</p>
-<p>delect    绝对删除     清空回收站    </p>
-<p><img src="C:%5CUsers%5Cxy%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200619150240400.png" alt="image-20200619150240400"></p>
-<p>如果是Object，可以存储各种类型</p>
-<p><img src="C:%5CUsers%5Cxy%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200619160610311.png" alt="image-20200619160610311"></p>
-<p>多次使用，先存再用</p>
-<p>只使用一次，可以直接用</p>
-<img src="C:\Users\xy\AppData\Roaming\Typora\typora-user-images\image-20200619162349464.png" alt="image-20200619162349464" style="zoom:50%;" />
+<h3 id="28、remove和delete区别"><a href="#28、remove和delete区别" class="headerlink" title="28、remove和delete区别"></a>28、remove和delete区别</h3><p>remove    相对删除    文件放入回收站</p>
+<p>delete    绝对删除     清空回收站    </p>
+<h3 id="29、代码优化"><a href="#29、代码优化" class="headerlink" title="29、代码优化"></a>29、代码优化</h3><p>如果是Object，可以存储各种类型</p>
+<p>同样的操作，如果需要多次使用，建议第一次获取时就存储，然后再使用用；如果只需使用一次，则可以直接用</p>
+<img src="C:\Users\xy\AppData\Roaming\Typora\typora-user-images\image-20200619160610311.png" alt="image-20200619160610311" style="zoom:50%;" />
 
-<img src="C:\Users\xy\AppData\Roaming\Typora\typora-user-images\image-20200619162459569.png" alt="image-20200619162459569" style="zoom:50%;" />
 
-<p>多选题B错</p>
+
+
+
+
+
+
+
+
+
+
+
 <h3 id="待实现功能："><a href="#待实现功能：" class="headerlink" title="待实现功能："></a>待实现功能：</h3><ol>
 <li><p>通过数组绘制基础图案：如爱心、星星。</p>
 <p>初步思路：初始化一个数组，结合for循环，根据一定的规律进行替换，从而形成指定的图案。</p>
@@ -660,6 +670,18 @@
 </ol>
 <hr>
 <h3 id="编程学习"><a href="#编程学习" class="headerlink" title="编程学习"></a>编程学习</h3><p>先记方法的功能，再根据中文回忆方法名</p>
+<p>费曼学习法</p>
+<p>代码敲7遍</p>
+<p>看视频也要多实践</p>
+<p>结果论-知道怎么用，用了有什么结果即可</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>错题集</title>
+    <url>/2020/06/22/%E9%94%99%E9%A2%98%E9%9B%86/</url>
+    <content><![CDATA[<img src="C:\Users\xy\AppData\Roaming\Typora\typora-user-images\image-20200622132207504.png" alt="image-20200622132207504" style="zoom: 50%;" />
+
+<p>B选项是错误的</p>
 ]]></content>
   </entry>
 </search>
