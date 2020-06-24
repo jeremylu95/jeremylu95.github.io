@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.ArrayList1.1ArrayList类概述【理解】什么是集合    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变ArrayList集合的特点    底层是数组实现的，长度可以变化泛型的使用    用于约束集合中存储元素的数据类型 1.2ArrayList类常用方法【应用】1.2.1构造方法12方法名                  说明public ArrayList()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.1 ArrayList">
+<meta property="og:url" content="http://yoursite.com/2020/06/25/9.1%20ArrayList/index.html">
+<meta property="og:site_name" content="Maple">
+<meta property="og:description" content="1.ArrayList1.1ArrayList类概述【理解】什么是集合    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变ArrayList集合的特点    底层是数组实现的，长度可以变化泛型的使用    用于约束集合中存储元素的数据类型 1.2ArrayList类常用方法【应用】1.2.1构造方法12方法名                  说明public ArrayList()">
+<meta property="article:published_time" content="2020-06-24T17:07:58.433Z">
+<meta property="article:modified_time" content="2020-06-24T17:17:07.810Z">
+<meta property="article:author" content="杰">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/25/9.1%20ArrayList/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>9.1 ArrayList | Maple</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maple</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/25/9.1%20ArrayList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/xing.jpg">
+      <meta itemprop="name" content="杰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maple">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          9.1 ArrayList
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-25 01:07:58 / 修改时间：01:17:07" itemprop="dateCreated datePublished" datetime="2020-06-25T01:07:58+08:00">2020-06-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述【理解】"><a href="#1-1ArrayList类概述【理解】" class="headerlink" title="1.1ArrayList类概述【理解】"></a>1.1ArrayList类概述【理解】</h3><p>什么是集合<br>    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变<br>ArrayList集合的特点<br>    底层是数组实现的，长度可以变化<br>泛型的使用<br>    用于约束集合中存储元素的数据类型</p>
+<h3 id="1-2ArrayList类常用方法【应用】"><a href="#1-2ArrayList类常用方法【应用】" class="headerlink" title="1.2ArrayList类常用方法【应用】"></a>1.2ArrayList类常用方法【应用】</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">方法名                  说明</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span>      创建一个空的集合对象</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">方法名                                       说明</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span>             删除指定的元素，返回删除是否成功</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span>                  删除指定索引处的元素，返回被删除的元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index,E element)</span>           修改指定索引处的元素，返回被修改的元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span>                     返回指定索引处的元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span>                           返回集合中的元素的个数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span>                     将指定的元素追加到此集合的末尾</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index,E element)</span>        在此集合中的指定位置插入指定的元素</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo02 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;创建集合</span><br><span class="line">        ArrayList&lt;String&gt; array &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;添加元素</span><br><span class="line">        array.add(&quot;hello&quot;);</span><br><span class="line">        array.add(&quot;world&quot;);</span><br><span class="line">        array.add(&quot;java&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;public boolean remove(Object o)：删除指定的元素，返回删除是否成功</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.remove(&quot;world&quot;));</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.remove(&quot;javaee&quot;));</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;public E remove(int index)：删除指定索引处的元素，返回被删除的元素</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.remove(1));</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;IndexOutOfBoundsException</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.remove(3));</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.set(1,&quot;javaee&quot;));</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;IndexOutOfBoundsException</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.set(3,&quot;javaee&quot;));</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;public E get(int index)：返回指定索引处的元素</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.get(0));</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.get(1));</span><br><span class="line">&#x2F;&#x2F;        System.out.println(array.get(2));</span><br><span class="line">        &#x2F;&#x2F;System.out.println(array.get(3)); &#x2F;&#x2F;？？？？？？ 自己测试</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;public int size()：返回集合中的元素的个数</span><br><span class="line">        System.out.println(array.size());</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;输出集合</span><br><span class="line">        System.out.println(&quot;array:&quot; + array);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3ArrayList存储字符串并遍历【应用】"><a href="#1-3ArrayList存储字符串并遍历【应用】" class="headerlink" title="1.3ArrayList存储字符串并遍历【应用】"></a>1.3ArrayList存储字符串并遍历【应用】</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">*</span><br><span class="line">思路：</span><br><span class="line">    <span class="number">1</span>:创建集合对象</span><br><span class="line">    <span class="number">2</span>:往集合中添加字符串对象</span><br><span class="line">    <span class="number">3</span>:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(<span class="keyword">int</span> index)方法实现</span><br><span class="line">    <span class="number">4</span>:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现</span><br><span class="line">    <span class="number">5</span>:遍历集合的通用格式</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建集合对象</span></span><br><span class="line">        ArrayList&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//往集合中添加字符串对象</span></span><br><span class="line">        array.add(<span class="string">"刘正风"</span>);</span><br><span class="line">        array.add(<span class="string">"左冷禅"</span>);</span><br><span class="line">        array.add(<span class="string">"风清扬"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现</span></span><br><span class="line"><span class="comment">//        System.out.println(array.size());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历集合的通用格式</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;array.size(); i++) &#123;</span><br><span class="line">            String s = array.get(i);</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4ArrayList存储学生对象并遍历【应用】"><a href="#1-4ArrayList存储学生对象并遍历【应用】" class="headerlink" title="1.4ArrayList存储学生对象并遍历【应用】"></a>1.4ArrayList存储学生对象并遍历【应用】</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">思路：</span></span><br><span class="line"><span class="comment">    1:定义学生类</span></span><br><span class="line"><span class="comment">    2:创建集合对象</span></span><br><span class="line"><span class="comment">    3:创建学生对象</span></span><br><span class="line"><span class="comment">    4:添加学生对象到集合中</span></span><br><span class="line"><span class="comment">    5:遍历集合，采用通用遍历格式实现</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建集合对象</span></span><br><span class="line">        ArrayList&lt;Student&gt; array = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建学生对象</span></span><br><span class="line">        Student s1 = <span class="keyword">new</span> Student(<span class="string">"林青霞"</span>, <span class="number">30</span>);</span><br><span class="line">        Student s2 = <span class="keyword">new</span> Student(<span class="string">"风清扬"</span>, <span class="number">33</span>);</span><br><span class="line">        Student s3 = <span class="keyword">new</span> Student(<span class="string">"张曼玉"</span>, <span class="number">18</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//添加学生对象到集合中</span></span><br><span class="line">        array.add(s1);</span><br><span class="line">        array.add(s2);</span><br><span class="line">        array.add(s3);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历集合，采用通用遍历格式实现</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.size(); i++) &#123;</span><br><span class="line">            Student s = array.get(i);</span><br><span class="line">            System.out.println(s.getName() + <span class="string">","</span> + s.getAge());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5ArrayList存储学生对象并遍历升级版【应用】"><a href="#1-5ArrayList存储学生对象并遍历升级版【应用】" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版【应用】"></a>1.5ArrayList存储学生对象并遍历升级版【应用】</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合<br>学生的姓名和年龄来自于键盘录入</p>
+<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">*</span><br><span class="line">思路：</span><br><span class="line">    <span class="number">1</span>:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型</span><br><span class="line">    <span class="number">2</span>:创建集合对象</span><br><span class="line">    <span class="number">3</span>:键盘录入学生对象所需要的数据</span><br><span class="line">    <span class="number">4</span>:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量</span><br><span class="line">    <span class="number">5</span>:往集合中添加学生对象</span><br><span class="line">    <span class="number">6</span>:遍历集合，采用通用遍历格式实现</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建集合对象</span></span><br><span class="line">        ArrayList&lt;Student&gt; array = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//为了提高代码的复用性，我们用方法来改进程序</span></span><br><span class="line">        addStudent(array);</span><br><span class="line">        addStudent(array);</span><br><span class="line">        addStudent(array);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历集合，采用通用遍历格式实现</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.size(); i++) &#123;</span><br><span class="line">            Student s = array.get(i);</span><br><span class="line">            System.out.println(s.getName() + <span class="string">","</span> + s.getAge());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    两个明确：</span></span><br><span class="line"><span class="comment">    返回值类型：void</span></span><br><span class="line"><span class="comment">    参数：ArrayList&lt;Student&gt; array</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">(ArrayList&lt;Student&gt; array)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//键盘录入学生对象所需要的数据</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"请输入学生姓名:"</span>);</span><br><span class="line">        String name = sc.nextLine();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"请输入学生年龄:"</span>);</span><br><span class="line">        String age = sc.nextLine();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建学生对象，把键盘录入的数据赋值给学生对象的成员变量</span></span><br><span class="line">        Student s = <span class="keyword">new</span> Student();</span><br><span class="line">        s.setName(name);</span><br><span class="line">        s.setAge(age);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//往集合中添加学生对象</span></span><br><span class="line">        array.add(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+	<div><div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文已结束&nbsp&nbsp<i class="fa fa-paw"></i>&nbsp&nbsp感谢您的阅读-------------</div>
+    
+</div>
+		
+	<div>
+        <div class="reward-container">
+  <div>Thanks!</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="杰 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="杰 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/25/8.3%20StringBuilder/" rel="prev" title="8.3 StringBuilder">
+      <i class="fa fa-chevron-left"></i> 8.3 StringBuilder
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/25/9.2%20%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="next" title="9.2 学生管理系统">
+      9.2 学生管理系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ArrayList"><span class="nav-number">1.</span> <span class="nav-text">1.ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1ArrayList类概述【理解】"><span class="nav-number">1.1.</span> <span class="nav-text">1.1ArrayList类概述【理解】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2ArrayList类常用方法【应用】"><span class="nav-number">1.2.</span> <span class="nav-text">1.2ArrayList类常用方法【应用】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1构造方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2成员方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3示例代码"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3示例代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3ArrayList存储字符串并遍历【应用】"><span class="nav-number">1.3.</span> <span class="nav-text">1.3ArrayList存储字符串并遍历【应用】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1案例需求"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1案例需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2代码实现"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4ArrayList存储学生对象并遍历【应用】"><span class="nav-number">1.4.</span> <span class="nav-text">1.4ArrayList存储学生对象并遍历【应用】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1案例需求"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1案例需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2代码实现"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5ArrayList存储学生对象并遍历升级版【应用】"><span class="nav-number">1.5.</span> <span class="nav-text">1.5ArrayList存储学生对象并遍历升级版【应用】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1案例需求"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1案例需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2代码实现"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2代码实现</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="杰"
+      src="/images/xing.jpg">
+  <p class="site-author-name" itemprop="name">杰</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jeremylu95" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jeremylu95" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jeremylu10@163.com" title="E-Mail → mailto:jeremylu10@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://baidu.com/" title="http:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+	  
+	  
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杰</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+  
+
+	
+
+</body>
+</html>
